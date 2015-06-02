@@ -1,5 +1,4 @@
-# SAWEF
-Send Attack Web Forms
+# SAWEF - Send Attack Web Forms
 ===============
 ```
 Danilo Vaz - UNK
@@ -24,10 +23,11 @@ Python              2.7
 - HELP
 ```
 usage: tool [-h] --url http://url.com/
-            [--user_agent '{"User-agent": "Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4"}"]
+            [--user_agent '{"User-agent": "Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8 Gecko/20050511 Firefox/1.0.4"}"]
             [--threads 10] --data '{"data":"value","data1":"value"}' [--qtd 5]
-            [--referer http://url.com/]
-            [--cookies '{"__utmz":"176859643.1432554849.1.1.utmcsr=(direct|utmccn=direct|utmcmd=none"}']
+            [--referer '{"referer": "http://url.com"}']
+            [--response status_code|headers|encoding|html|json]
+            [--cookies '{"__utmz":"176859643.1432554849.1.1.utmcsr=direct|utmccn=direct|utmcmd=none"}']
 
 optional arguments:
   -h, --help        show this help message and exit
@@ -40,14 +40,16 @@ optional arguments:
   --data '{"data":"value","data1":"value"}'
                     Data to be transmitted by post
   --qtd 5           Quantity requests
-  --referer http://url.com/
+  --referer '{"referer": "http://url.com"}'
                     Referer
+  --response status_code|headers|encoding|html|json
+                    Status return
   --cookies '{"__utmz":"176859643.1432554849.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)"}'
                     Cookies from site
 ```
 - EXAMPLE
 ```
-Enviando 1 SMS anônimo via POST:
+Send 1 SMS anonymous to POST [in BR]:
 -------------
 $:> python sawef.py --url "https://smsgenial.com.br/forms_teste/enviar.php" --data '{"celular":"(11) XXXX-XXXXX","mensagem":"Teste","Testar":"Enviar"}' --threads 10 --qtd 1 --user_agent '{"User-agent":"Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4"}'
 ```

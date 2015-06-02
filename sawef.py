@@ -11,11 +11,27 @@ __email__ = "danilovazb@gmail.com"
 """
 Gr33tz: @geolado, @slayer_owner, @Rogy153, SlackDummies,@GoogleInurl, Gr0upWhatsApp [DEV]l33t0s
 
-Thank my brother Geolado the basis of this script, 
-it is based on https://github.com/geolado/P0st3r/blob/master/p0st3r.py
+Th4nk my br0th3r g30l4d0 th3 b4$1$ 0f th1$ $cr1pt, 
+1t 1$ b4$3d 0n https://github.com/geolado/P0st3r/blob/master/p0st3r.py
+
+██╗     ██████╗ ██████╗ ████████╗ ██████╗ ███████╗    ██╗  ██╗██╗  ██╗██╗  ██╗ ██████╗ ██████╗ ███████╗
+██║     ╚════██╗╚════██╗╚══██╔══╝██╔═████╗██╔════╝    ██║  ██║██║  ██║╚██╗██╔╝██╔═████╗██╔══██╗██╔════╝
+██║      █████╔╝ █████╔╝   ██║   ██║██╔██║███████╗    ███████║███████║ ╚███╔╝ ██║██╔██║██████╔╝███████╗
+██║      ╚═══██╗ ╚═══██╗   ██║   ████╔╝██║╚════██║    ██╔══██║╚════██║ ██╔██╗ ████╔╝██║██╔══██╗╚════██║
+███████╗██████╔╝██████╔╝   ██║   ╚██████╔╝███████║    ██║  ██║     ██║██╔╝ ██╗╚██████╔╝██║  ██║███████║
+╚══════╝╚═════╝ ╚═════╝    ╚═╝    ╚═════╝ ╚══════╝    ╚═╝  ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+                                                                                                       
+0x01 - 4g0r4 3h 0 hu3hu3hu3br qu3 m4nd4, g00gl31nurlbr j4h 3$tá n4 c3n4, 4v4nt3 40 hu3hu31nth3w0rld
+0x02 - $1t3: http://unk-br.blogspot.com.br
+0x03 - $1t3: http://moshcode.com.br
+0x04 - $1t3: http://blog.inurl.com.br
+0x05 - $1t3: http://slayerowner.blogspot.com.br
+0x06 - $1t3: http://koubacktr.wordpress.com/
+0x07 - $1t3: http://b00t4nd0.com/
+0x08 - $1t3: http://blog.inurl.com.br                                                                                                       
 
 """
-
+ 
 import threading
 import time
 import argparse
