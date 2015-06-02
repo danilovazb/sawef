@@ -14,22 +14,61 @@ import argparse
 import requests
 import json
  
+def retorno_status(retorno,response):
+	if 'status_code' in retorno:
+		status = response.status_code
+		print "\n[+] STATUS CODE = %s" % (status)
+	elif 'headers' in retorno:
+		status = response.headers
+		print "\n[+] HEADERS = %s" % (status)
+	elif 'encoding' in retorno:
+		status = response.encoding
+		print "\n[+] ENCODING = %s" % (status)
+	elif 'html' in retorno:
+		status = response.text
+		print "\n[+] HTML = %s" % (status)
+	elif 'json' in retorno:
+		status = response.json()
+		print "\n[+] JSON = %s" % (status)
+	elif 'all' in retorno:
+		status = response.status_code
+		print "\n[+] STATUS CODE = %s" % (status)
+		status1 = response.headers
+		print "\n[+] HEADERS = %s" % (status1)
+		status2 = response.encoding
+		print "\n[+] ENCODING = %s" % (status2)
+		status2 = response.text
+		print "\n[+] HTML = %s" % (status2)
+		status3 = response.json()
+		print "\n[+] JSON = %s" % (status3)
+
+def request_url(qtd,url,data,user_agent,retorno,cookie,referer):
+	if referer != None:
+		user_agent.update(referer)
+	if cookie is None:
+		response = requests.post(url, data=data, headers=user_agent)
+	elif cookie != None:
+		response = requests.post(url, data=data, headers=user_agent, cookies=cookie)
+
+	return response
+
 # Função para cada thread
-def send_cmd(qtd,url,data,user_agent):
-	response = requests.post(url, data=data, headers=user_agent)
-	status = response.status_code
-	print "[%s] STATUS CODE = %s" % (qtd,status)
+def send_cmd(qtd,url,data,user_agent,retorno,cookie,referer):
+	response = request_url(qtd,url,data,user_agent,retorno,cookie,referer)
+	retorno = retorno_status(retorno,response)
+	
 
 if __name__ == "__main__":
 	
-	parser = argparse.ArgumentParser(prog='tool',formatter_class=lambda prog: argparse.HelpFormatter(prog,max_help_position=50))
+	parser = argparse.ArgumentParser(prog='tool',formatter_class=lambda prog: argparse.HelpFormatter(prog,max_help_position=20))
 	parser.add_argument("--url", help = "URL to request" , metavar= "http://url.com/" ,  required=True)
 	parser.add_argument("--user_agent",type=json.loads, \
 		help = "For a longer list, visit: http://www.useragentstring.com/pages/useragentstring.php" , metavar= "\'{\"User-agent\": \"Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4\"}\"" ,  default='{"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4"}')
 	parser.add_argument("--threads", help = "Threads" , metavar= "10" , default=1)
 	parser.add_argument("--data", type=json.loads, help = "Data to be transmitted by post" , metavar= "\'{\"data\":\"value\",\"data1\":\"value\"}\'" ,  required=True)
 	parser.add_argument("--qtd", help = "Quantity requests" , metavar= "5" ,  default=1)
-	parser.add_argument("--referer", help = "Referer" , metavar= "http://url.com/")
+	parser.add_argument("--referer", type=json.loads,help = "Referer" , metavar= "\'{\"referer\": \"http://url.com\"}\'")
+	parser.add_argument("--response", help = "Status return" , metavar= "status_code|headers|encoding|html|json", default="status_code")
 	parser.add_argument("--cookies", type=json.loads,help = "Cookies from site" , metavar= "\'{\"__utmz\":\"176859643.1432554849.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\"}\'")
 	args = parser.parse_args()
 	
@@ -40,6 +79,7 @@ if __name__ == "__main__":
 	qtd = args.qtd
 	cookie = args.cookies
 	referer = args.referer
+	retorno = args.response
 
 	MAX_CONEXOES = threads
 	# Thread principal
@@ -48,11 +88,11 @@ if __name__ == "__main__":
 		while threading.active_count() > MAX_CONEXOES:
 			print("Esperando 1s...")
 			time.sleep(1)
-		thread = threading.Thread(target=send_cmd, args=(qtd,url,data,user_agent))
+		thread = threading.Thread(target=send_cmd, args=(qtd,url,data,user_agent,retorno,cookie,referer))
 		lista_threads.append(thread)
 		thread.start()
 	 
 	# Esperando pelas threads abertas terminarem
-	print("Esperando threads abertas terminarem...")
+	#print("Esperando threads abertas terminarem...")
 	for thread in lista_threads:
 		thread.join()
