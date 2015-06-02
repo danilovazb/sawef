@@ -7,7 +7,15 @@ __license__ = "GPL"
 __version__ = "0.1"
 __maintainer__ = "Danilo Vaz aka UNK"
 __email__ = "danilovazb@gmail.com"
- 
+
+"""
+Gr33tz: @geolado, @slayer_owner, @Rogy153, SlackDummies,@GoogleInurl, Gr0upWhatsApp [DEV]l33t0s
+
+Thank my brother Geolado the basis of this script, 
+it is based on https://github.com/geolado/P0st3r/blob/master/p0st3r.py
+
+"""
+
 import threading
 import time
 import argparse
