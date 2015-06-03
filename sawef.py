@@ -89,7 +89,7 @@ if __name__ == "__main__":
 	parser.add_argument("--user_agent",type=json.loads, \
 		help = "For a longer list, visit: http://www.useragentstring.com/pages/useragentstring.php" , metavar= "\'{\"User-agent\": \"Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4\"}\"" ,  default='{"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4"}')
 	parser.add_argument("--threads", help = "Threads" , metavar= "10" , default=1)
-	parser.add_argument("--data", type=json.loads, help = "Data to be transmitted by post" , metavar= "\'{\"data\":\"value\",\"data1\":\"value\"}\'" ,  required=True)
+	parser.add_argument("--data", type=json.loads, help = "Data to be transmitted by post" , metavar= "\'{\"data\":\"value\",\"data1\":\"value\"}\'" ,  required=False)
 	parser.add_argument("--qtd", help = "Quantity requests" , metavar= "5" ,  default=1)
 	parser.add_argument("--referer", type=json.loads,help = "Referer" , metavar= "\'{\"referer\": \"http://url.com\"}\'")
 	parser.add_argument("--response", help = "Status return" , metavar= "status_code|headers|encoding|html|json", default="status_code")
