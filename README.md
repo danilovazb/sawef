@@ -14,11 +14,18 @@ time
 argparse
 requests
 json
+BeautifulSoap
 permission          Reading & Writing
 User                root privilege, or is in the sudoers group
 Operating system    LINUX
 Python              2.7
  ----------------------------------------------------------
+```
+- INSTALL
+```
+git clone http://github.com/danilovazb/SAWEF
+
+sudo apt-get install python-bs4 python-requests
 ```
 - HELP
 ```
