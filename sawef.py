@@ -37,7 +37,49 @@ import time
 import argparse
 import requests
 import json
- 
+from bs4 import BeautifulSoup
+
+def retorno_form(response):
+	html = response.text
+	html_proc = BeautifulSoup(response.text)
+	qntd_form = len(html_proc.find_all("form"))
+	for i in range(int(qntd_form)):
+	        if html_proc.find_all("form")[i].has_attr('name'):
+	                nome_form = html_proc.find_all("form")[i]['name']
+	        else:
+	                nome_form = "None"
+	        if html_proc.find_all("form")[i].has_attr('action'):
+	                url_action = html_proc.find_all("form")[i]['action']
+	        else:
+		                url_action = "None"
+	        if html_proc.find_all("form")[i].has_attr('method'):
+	                method = html_proc.find_all("form")[i]['method']
+	        else:
+	                method = "None"
+	        print "\n--------------------------------\nNOME_FORM[%s]\nURL[%s]\nMETHOD[%s]\n" % (nome_form,url_action,method)
+	        qntd_input = len(html_proc.find_all("form")[i].find_all("input"))
+	        for a in range(int(qntd_input)):
+	                if html_proc.find_all("form")[i].find_all("input")[a].has_attr('name'):
+	                	nome_input = html_proc.find_all("form")[i].find_all("input")[a]['name']
+	                	if "" == nome_input:
+	                		nome_input = "<NONE>"
+	                else:
+	                	nome_input = "<NONE>"
+	                if html_proc.find_all("form")[i].find_all("input")[a].has_attr('value'):
+	                	valor_input = html_proc.find_all("form")[i].find_all("input")[a]['value']
+	                	if "" == valor_input:
+	                		valor_input = "<NONE>"
+	                else:
+	                	valor_input = "<NONE>"
+	                if html_proc.find_all("form")[i].find_all("input")[a].has_attr('type'):
+	                	tipo_input = html_proc.find_all("form")[i].find_all("input")[a]['type']
+	                	if "" == tipo_input:
+	                		tipo_input = "<NONE>"
+	                else:
+	                	tipo_input = "<NONE>"
+	                print "%s:%s        (%s)" % (nome_input,valor_input,tipo_input)
+	
+	 
 def retorno_status(retorno,response):
 	if 'status_code' in retorno:
 		status = response.status_code
@@ -65,20 +107,28 @@ def retorno_status(retorno,response):
 		print "\n[+] HTML = %s" % (status2)
 		status3 = response.json()
 		print "\n[+] JSON = %s" % (status3)
+	elif 'form' in retorno:
+		form = retorno_form(response)
 
-def request_url(qtd,url,data,user_agent,retorno,cookie,referer):
+def request_url(qtd,url,data,user_agent,retorno,cookie,referer,method):
 	if referer != None:
 		user_agent.update(referer)
 	if cookie is None:
-		response = requests.post(url, data=data, headers=user_agent)
+		if 'post' == method: # is 'post':
+			response = requests.post(url, data=data, headers=user_agent)
+		else:
+			response = requests.get(url, data=data, headers=user_agent)
 	elif cookie != None:
-		response = requests.post(url, data=data, headers=user_agent, cookies=cookie)
+		if 'post' == method: #is 'post':
+			response = requests.post(url, data=data, headers=user_agent, cookies=cookie)
+		else:
+			response = requests.post(url, data=data, headers=user_agent, cookies=cookie)
 
 	return response
 
 # Função para cada thread
-def send_cmd(qtd,url,data,user_agent,retorno,cookie,referer):
-	response = request_url(qtd,url,data,user_agent,retorno,cookie,referer)
+def send_cmd(qtd,url,data,user_agent,retorno,cookie,referer,method):
+	response = request_url(qtd,url,data,user_agent,retorno,cookie,referer,method)
 	retorno = retorno_status(retorno,response)
 	
 
@@ -91,12 +141,18 @@ if __name__ == "__main__":
 	parser.add_argument("--threads", help = "Threads" , metavar= "10" , default=1)
 	parser.add_argument("--data", type=json.loads, help = "Data to be transmitted by post" , metavar= "\'{\"data\":\"value\",\"data1\":\"value\"}\'" ,  required=False)
 	parser.add_argument("--qtd", help = "Quantity requests" , metavar= "5" ,  default=1)
+	parser.add_argument("--method", help = "Method sends requests" , metavar= "post|get" ,  default='get')
 	parser.add_argument("--referer", type=json.loads,help = "Referer" , metavar= "\'{\"referer\": \"http://url.com\"}\'")
-	parser.add_argument("--response", help = "Status return" , metavar= "status_code|headers|encoding|html|json", default="status_code")
+	parser.add_argument("--response", help = "Status return" , metavar= "status_code|headers|encoding|html|json|form", default="status_code")
 	parser.add_argument("--cookies", type=json.loads,help = "Cookies from site" , metavar= "\'{\"__utmz\":\"176859643.1432554849.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)\"}\'")
 	args = parser.parse_args()
 	
 	url = args.url
+	ultimo_char = url[len(url)-1]
+        if '/' == ultimo_char:
+                pass
+        else:
+                url = "%s/" % url
 	user_agent = args.user_agent
 	threads = args.threads
 	data = args.data
@@ -104,6 +160,7 @@ if __name__ == "__main__":
 	cookie = args.cookies
 	referer = args.referer
 	retorno = args.response
+	method = args.method
 
 	MAX_CONEXOES = threads
 	# Thread principal
@@ -112,11 +169,10 @@ if __name__ == "__main__":
 		while threading.active_count() > MAX_CONEXOES:
 			print("Esperando 1s...")
 			time.sleep(1)
-		thread = threading.Thread(target=send_cmd, args=(qtd,url,data,user_agent,retorno,cookie,referer))
+		thread = threading.Thread(target=send_cmd, args=(qtd,url,data,user_agent,retorno,cookie,referer,method))
 		lista_threads.append(thread)
 		thread.start()
 	 
 	# Esperando pelas threads abertas terminarem
-	#print("Esperando threads abertas terminarem...")
 	for thread in lista_threads:
 		thread.join()
