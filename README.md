@@ -60,11 +60,11 @@ optional arguments:
 ```
 - EXAMPLE
 ```
-Send 1 SMS anonymous to POST [in BR]:
+*Send 1 SMS anonymous to POST [in BR]:
 -------------
 $:> python sawef.py --url "https://smsgenial.com.br/forms_teste/enviar.php" --data '{"celular":"(11) XXXX-XXXXX","mensagem":"Teste","Testar":"Enviar"}' --threads 10 --qtd 1 --user_agent '{"User-agent":"Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4"}'
 
-List Form attributes:
+*List Form attributes:
 -------------
 $:> python sawef.py --url "https://smsgenial.com.br/ --method post --response form
 OUTPUT:
