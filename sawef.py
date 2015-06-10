@@ -107,7 +107,7 @@ def retorno_status(retorno, response):
                     print "[+] LINK = %s" % (url_completa)
                     new_list_links.append(url_completa)
                     
-        print "[+] FOUND = %s" % (str(len(new_list_links)))
+        print "[+] FOUND %s LINKS\n" % (str(len(new_list_links)))
     elif 'emails' in retorno:
         status = response.text
         regex = re.compile(("([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*(@|\sat\s)(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(\.|\sdot\s))+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)"))
@@ -120,7 +120,7 @@ def retorno_status(retorno, response):
             else:
                 new_list_email.append(emails[count_email][0])
                 print "[+] EMAIL = %s" % (emails[count_email][0])
-        print "FOUND = %s" % (str(len(new_list_email)))
+        print "FOUND %s EMAILS\n" % (str(len(new_list_email)))
     elif 'all' in retorno:
         status = response.status_code
         print "\n[+] STATUS CODE = %s" % (status)
@@ -185,17 +185,20 @@ if __name__ == "__main__":
     referer = args.referer
     retorno = args.response
     method = args.method
-
+    
+    retorno = retorno.split(',')
+    print len(retorno)
     MAX_CONEXOES = threads
     # Thread principal
     lista_threads = []
     for i in range(int(qtd)):
-        while threading.active_count() > MAX_CONEXOES:
-            print("Esperando 1s...")
-            time.sleep(1)
-        thread = threading.Thread(target=send_cmd, args=(qtd, url, data, user_agent, retorno, cookie, referer, method))
-        lista_threads.append(thread)
-        thread.start()
+        for j in range(len(retorno)):
+            while threading.active_count() > MAX_CONEXOES:
+                print("Esperando 1s...")
+                time.sleep(1)
+            thread = threading.Thread(target=send_cmd, args=(qtd, url, data, user_agent, retorno[j], cookie, referer, method))
+            lista_threads.append(thread)
+            thread.start()
      
     # Esperando pelas threads abertas terminarem
     for thread in lista_threads:
