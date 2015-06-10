@@ -25,12 +25,15 @@ but we can already see in this tool:
 ### REQUERIMENTS
 ```
  ----------------------------------------------------------
+Import:
 threading
 time
 argparse
 requests
 json
-BeautifulSoap
+re
+BeautifulSoup
+
 permission          Reading & Writing
 User                root privilege, or is in the sudoers group
 Operating system    LINUX
