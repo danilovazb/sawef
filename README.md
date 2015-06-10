@@ -6,7 +6,7 @@ danilovazb@gmail.com
 http://unk-br.blogspot.com
 https://twitter.com/unknownantisec
 ```
-=== DESCRIPTION
+### DESCRIPTION
 ```
 The purpose of this tool is to be a Swiss army knife 
 for anyone who works with HTTP, so far it she is basic, 
@@ -15,34 +15,38 @@ but we can already see in this tool:
 
 - Email Crawler in sites
 - Crawler forms on the page
+- Crawler links on web pages
 - Sending POST and GET
 - Support for USER-AGENT
 - Support for THREADS
 - Support for COOKIES
 ```
 
-=== REQUERIMENTS
+### REQUERIMENTS
 ```
  ----------------------------------------------------------
+Import:
 threading
 time
 argparse
 requests
 json
-BeautifulSoap
+re
+BeautifulSoup
+
 permission          Reading & Writing
 User                root privilege, or is in the sudoers group
 Operating system    LINUX
 Python              2.7
  ----------------------------------------------------------
 ```
-=== INSTALL
+### INSTALL
 ```
 git clone http://github.com/danilovazb/SAWEF
 
 sudo apt-get install python-bs4 python-requests
 ```
-=== HELP
+### HELP
 ```
 usage: tool [-h] --url http://url.com/
             [--user_agent '{"User-agent": "Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8 Gecko/20050511 Firefox/1.0.4"}"]
@@ -73,7 +77,7 @@ optional arguments:
                     Cookies from site
 
 ```
-=== EXAMPLE
+### EXAMPLE
 ```
 *Send 1 SMS anonymous to POST [in BR]:
 -------------
@@ -81,7 +85,7 @@ $:> python sawef.py --url "https://smsgenial.com.br/forms_teste/enviar.php" --da
 
 *List Form attributes:
 -------------
-$:> python sawef.py --url "https://smsgenial.com.br/ --method post --response form
+$:> python sawef.py --url "https://smsgenial.com.br/" --method post --response form
 OUTPUT:
 
 --------------------------------
@@ -113,7 +117,28 @@ METHOD[post]
 celular:<NONE>        (text)
 Testar:Enviar        (submit)
 
+* Get email web pages
+$:> python sawef.py --url "http://pastebin.com/ajaYnLYc" --response emails
+[...]
+[+] EMAIL = manothradevi@yahoo.com
+[+] EMAIL = fantaghiroaziera@yahoo.com
+[+] EMAIL = naqibjohari@yahoo.com
+[+] EMAIL = azliey3036@yahoo.com
+[+] EMAIL = azlin_4531@yahoo.com.my
+[+] EMAIL = urshawal96@yahoo.com
+[+] EMAIL = weeta_aida88@yahoo.com.my
+FOUND = 3065
+
+* Get links on web pages
+$:> python sawef.py --url "http://terra.com.br" --response links
+[...]
+[+] LINK = http://uol.com.br/https://pagseguro.uol.com.br/vender
+[+] LINK = http://www.uolhost.com.br/registro-de-dominio.html
+[+] LINK = http://noticias.uol.com.br/arquivohome/
+[+] LINK = http://noticias.uol.com.br/erratas/
+[+] LINK = http://uol.com.br/#
+[+] FOUND = 360
 
 ```
-=== SCREENSHOT
+### SCREENSHOT
 ![Screenshot](https://unknownsec.files.wordpress.com/2015/06/screenshot.png)
