@@ -6,7 +6,22 @@ danilovazb@gmail.com
 http://unk-br.blogspot.com
 https://twitter.com/unknownantisec
 ```
-- REQUERIMENTS
+=== DESCRIPTION
+```
+The purpose of this tool is to be a Swiss army knife 
+for anyone who works with HTTP, so far it she is basic, 
+bringing only some of the few features that want her to have, 
+but we can already see in this tool:
+
+- Email Crawler in sites
+- Crawler forms on the page
+- Sending POST and GET
+- Support for USER-AGENT
+- Support for THREADS
+- Support for COOKIES
+```
+
+=== REQUERIMENTS
 ```
  ----------------------------------------------------------
 threading
@@ -21,13 +36,13 @@ Operating system    LINUX
 Python              2.7
  ----------------------------------------------------------
 ```
-- INSTALL
+=== INSTALL
 ```
 git clone http://github.com/danilovazb/SAWEF
 
 sudo apt-get install python-bs4 python-requests
 ```
-- HELP
+=== HELP
 ```
 usage: tool [-h] --url http://url.com/
             [--user_agent '{"User-agent": "Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8 Gecko/20050511 Firefox/1.0.4"}"]
@@ -58,7 +73,7 @@ optional arguments:
                     Cookies from site
 
 ```
-- EXAMPLE
+=== EXAMPLE
 ```
 *Send 1 SMS anonymous to POST [in BR]:
 -------------
@@ -100,5 +115,5 @@ Testar:Enviar        (submit)
 
 
 ```
-- SCREENSHOT
+=== SCREENSHOT
 ![Screenshot](https://unknownsec.files.wordpress.com/2015/06/screenshot.png)
