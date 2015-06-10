@@ -8,7 +8,10 @@ https://twitter.com/unknownantisec
 ```
 === DESCRIPTION
 ```
-The purpose of this tool is to be a Swiss army knife for anyone who works with HTTP, so far it she is basic, bringing only some of the few features that want her to have, but we can already see in this tool:
+The purpose of this tool is to be a Swiss army knife 
+for anyone who works with HTTP, so far it she is basic, 
+bringing only some of the few features that want her to have, 
+but we can already see in this tool:
 
 - Email Crawler in sites
 - Crawler forms on the page
