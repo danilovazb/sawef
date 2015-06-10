@@ -93,11 +93,21 @@ def retorno_status(retorno, response):
     elif 'links' in retorno:
         status = response.text
         soup = BeautifulSoup(status)
+        found_link = 0
+        new_list_links = []
         for link in soup.find_all('a', href=True):
-            if url in link['href']:
-                print "[+] LINK = %s" % (link['href'])
+            if link['href'] in new_list_links:
+                pass
             else:
-                print "[+] LINK = %s%s" % (url,link['href'])
+                if url in link['href'] or 'http://' in link['href']:
+                    print "[+] LINK = %s" % (link['href'])
+                    new_list_links.append(link['href'])
+                else:
+                    url_completa = "%s%s" % (url,link['href'])
+                    print "[+] LINK = %s" % (url_completa)
+                    new_list_links.append(url_completa)
+                    
+        print "[+] FOUND = %s" % (str(len(new_list_links)))
     elif 'emails' in retorno:
         status = response.text
         regex = re.compile(("([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*(@|\sat\s)(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(\.|\sdot\s))+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)"))
