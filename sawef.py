@@ -99,7 +99,7 @@ def retorno_status(retorno, response):
             if link['href'] in new_list_links:
                 pass
             else:
-                if url in link['href'] or 'http://' in link['href']:
+                if url in link['href'] or 'http://' in link['href'] or 'https://' in link['href']:
                     print "[+] LINK = %s" % (link['href'])
                     new_list_links.append(link['href'])
                 else:
@@ -187,7 +187,6 @@ if __name__ == "__main__":
     method = args.method
     
     retorno = retorno.split(',')
-    print len(retorno)
     MAX_CONEXOES = threads
     # Thread principal
     lista_threads = []
