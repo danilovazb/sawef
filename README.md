@@ -50,11 +50,12 @@ sudo apt-get install python-bs4 python-requests
 ```
 usage: tool [-h] --url http://url.com/
             [--user_agent '{"User-agent": "Mozilla/5.0 Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8 Gecko/20050511 Firefox/1.0.4"}"]
-            [--threads 10] [--data '{"data":"value","data1":"value"}']
+            [--threads 10] [--data '{"data":"value", "data1":"value"}']
             [--qtd 5] [--method post|get]
             [--referer '{"referer": "http://url.com"}']
-            [--response status_code|headers|encoding|html|json|form]
+            [--response status_code|headers|encoding|html|form|links|emails]
             [--cookies '{"__utmz":"176859643.1432554849.1.1.utmcsr=direct|utmccn=direct|utmcmd=none"}']
+            [--modulo crawler]
 
 optional arguments:
   -h, --help        show this help message and exit
@@ -64,17 +65,18 @@ optional arguments:
                     For a longer list, visit:
                     http://www.useragentstring.com/pages/useragentstring.php
   --threads 10      Threads
-  --data '{"data":"value","data1":"value"}'
+  --data '{"data":"value", "data1":"value"}'
                     Data to be transmitted by post
   --qtd 5           Quantity requests
   --method post|get
                     Method sends requests
   --referer '{"referer": "http://url.com"}'
                     Referer
-  --response status_code|headers|encoding|html|json|form
+  --response status_code|headers|encoding|html|form|links|emails
                     Status return
   --cookies '{"__utmz":"176859643.1432554849.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)"}'
                     Cookies from site
+  --modulo crawler  Carrega modulo adcional
 
 ```
 ### EXAMPLE
@@ -138,6 +140,64 @@ $:> python sawef.py --url "http://terra.com.br" --response links
 [+] LINK = http://noticias.uol.com.br/erratas/
 [+] LINK = http://uol.com.br/#
 [+] FOUND = 360
+
+* Crawling site
+
+$:> python sawef.py --url "http://www.100security.com.br" --modulo "crawler"
+Emails: 
+
+[+] marcos@aulasdeti.com.br
+[+] marcos@100security.com.br
+[+] danilovazb@gmail.com
+[+] cve@mitre.org
+[+] cve-id-change@mitre.org
+[+] devon@digitalsanctuary.com
+[+] g5382139@trbvm.com
+[+] editor@www.com
+[+] support@senderbase.org
+[+] 0x0ptim0us@gmail.com
+[+] ramiro.caire@gmail.com
+[+] fgmassa@vanguardsec.com
+[+] crime.internet@dpf.gov.br
+[+] cgpre@dpf.gov.br
+[+] dpat.dcor@dpf.gov.br
+[+] dicof.cgcsp@dpf.gov.br
+[+] coain.coger@dpf.gov.br
+[+] dprev.cgpfaz@dpf.gov.br
+[+] dicat@pcdf.df.gov.br
+[+] nureccel@pc.es.gov.br
+[+] devir@pc.ms.gov.br
+[+] comunicacao@policiacivil.pa.gov.br
+[+] cibercrimes@pc.pr.gov.br
+[+] policiac@fisepe.pe.gov.br
+[+] drci@policiacivil.rj.gov.br
+[+] drci@pcerj.rj.gov.br
+[+] drci@pc.rs.gov.br
+[+] 4dp.dig.deic@policiacivil.sp.gov.br
+[+] marcos@marcoshenrique.com
+[+] contato@fabricadeaplicativos.com.br
+[+] email@mail.com.br
+[+] lcm@lcm.com.br
+[+] luizwt at gmail.com
+[+] luizwt@gmail.com
+[+] geoff@deconcept.com
+[+] revista@espiritolivre.org
+[+] email@email.com
+[+] s**********s@gmail.com
+[+] //iriok@hotmail.com
+
+Twitter:
+[+] https://twitter.com/100security
+
+Linkedin:
+
+Google Plus:
+
+Facebook:
+[+] https://www.facebook.com/seguranca.da.informacao
+
+Youtube:
+[+] http://www.youtube.com/user/videos100security/videos
 
 ```
 ### SCREENSHOT
