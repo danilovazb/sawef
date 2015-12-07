@@ -94,7 +94,7 @@ class crawler(object):
 					print "[+] %s" % self.lista_links[twitter]
 			print "\nLinkedin:"
 			for linkedin in xrange(len(self.lista_links)):
-				r_linkedin = re.compile('(https?):\/\/br\.linkedin\.com\/(in\/)?[a-zA-Z0-9_]+')
+				r_linkedin = re.compile('(https?):\/\/(?:www|br|)?(\.?)linkedin\.com\/(in\/|company\/)?[a-zA-Z0-9_]+')
 				t_or_f = r_linkedin.match(self.lista_links[linkedin]) is None
 				if t_or_f is True:
 					pass
