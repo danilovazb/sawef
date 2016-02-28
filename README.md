@@ -4,7 +4,7 @@
 Danilo Vaz - UNK
 danilovazb@gmail.com
 http://unk-br.blogspot.com
-https://twitter.com/unknownantisec
+https://twitter.com/danilovaz_unk
 ```
 ### DESCRIPTION
 ```
