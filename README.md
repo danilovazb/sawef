@@ -1,11 +1,5 @@
 # SAWEF - Send Attack Web Forms
 ===============
-```
-Danilo Vaz - UNK
-danilovazb@gmail.com
-http://unk-br.blogspot.com
-https://twitter.com/danilovaz_unk
-```
 ### DESCRIPTION
 ```
 The purpose of this tool is to be a Swiss army knife 
