@@ -2,31 +2,13 @@
 # -*- coding: utf-8 -*-
 # nubank teste
  
-__author__ = "Danilo Vaz aka UNK"
+__author__ = "UnkL4b"
 __credits__ = ["Danilo Vaz"]
 __license__ = "GPL"
 __version__ = "0.1"
-__maintainer__ = "Danilo Vaz aka UNK"
-__email__ = "danilovazb@gmail.com"
- 
-"""
-My blog: http://unk-br.blogspot.com.br
-GitHub: http://github.com/danilovazb
-Twitter: http://twitter.com/unknownantisec
+__maintainer__ = "UnkL4b"
+__email__ = "danilo.vaz@protonmail.com"
 
-Gr33tz: @geolado, @slayer_owner, @Rogy153, SlackDummies,@GoogleInurl, Gr0upWhatsApp [DEV]l33t0s
-
-0x01 - 4g0r4 3h 0 hu3hu3hu3br qu3 m4nd4, g00gl31nurlbr j4h 3$tá n4 c3n4, 4v4nt3 40 hu3hu31nth3w0rld
-0x02 - $1t3: http://unk-br.blogspot.com.br
-0x03 - $1t3: http://moshcode.com.br
-0x04 - $1t3: http://blog.inurl.com.br
-0x05 - $1t3: http://slayerowner.blogspot.com.br
-0x06 - $1t3: http://koubacktr.wordpress.com/
-0x07 - $1t3: http://b00t4nd0.com/
-0x08 - $1t3: http://blog.inurl.com.br 
-0x09 - $1t3: http://www.100security.com.br 
-
-"""
  
 import threading
 import time
